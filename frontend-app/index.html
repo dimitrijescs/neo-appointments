@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="interview">
+<head>
+    <meta charset="UTF-8">
+    <title>A responsive website</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script>
+        angular.module('interview', [])
+            .component('salutation', {
+                template: `
+<span>{{$ctrl.salutation}}</span>
+`,
+                bindings: {
+                    name: '@'
+                },
+                controller: function () {
+                    this.$onInit = () => {
+                        if (this.name) {
+                            this.salutation = 'Hi ' + this.name + '!';
+                        }
+                    }
+                }
+            });
+    </script>
+</head>
+<body>
+<salutation name="George"></salutation>
+
+<script type="text/javascript" src="http://jeromecovington.github.io/jasmine-all/jasmine-all.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-mocks.js"></script>
+<script>
+    describe('interview', function () {
+        beforeEach(function () {
+            module('interview');
+        });
+
+        describe('salutation component', function () {
+            let controller,
+                $scope,
+                $q;
+
+            beforeEach(inject(function ($componentController, $rootScope, _$q_) {
+                $scope = $rootScope.$new();
+                controller = $componentController('salutation', {
+                    $scope: $scope
+                });
+                $q = _$q_;
+            }));
+
+            describe('ctrl.$onInit', function () {
+                it('should calculate the salutation', function () {
+                    //given
+                    controller.name = 'Martin';
+                    //when
+                    controller.$onInit();
+                    //then
+                    expect(controller.salutation).toEqual('Hi Martin!');
+                });
+
+                xit('should calculate the salutation for a promised name', function () {
+                    //given
+                    controller.name = $q.when('Niko');
+                    //when
+                    controller.$onInit();
+                    //then
+                    expect(controller.salutation).toEqual('Hi Niko!');
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>
