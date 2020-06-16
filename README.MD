@@ -25,3 +25,5 @@ Interview
  2. Enhance 1 by splitting the appointments into 2 dropdowns:
      - 2.1 A dropdown holding all the days of available dates (day, month) for appointments
      - 2.2 A dropdown showing the specific timeslots available for the date selected in the first dropdown
+
+[![Run on Repl.it](https://repl.it/badge/github/dimitrijescs/rotterdam-interview)](https://repl.it/github/dimitrijescs/rotterdam-interview)
